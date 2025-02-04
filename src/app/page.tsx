@@ -5,14 +5,12 @@ const Home = () => {
   return (
     <>
       <main className="container center">
-        <div>
-          <div className="row justify-content-center">
+      <div className="row justify-content-center">
             <InputSearch />
           </div>
           <div className="row">
             <WeatherCard/>
           </div>
-        </div>
       </main>
     </>
   )

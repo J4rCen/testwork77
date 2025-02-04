@@ -17,7 +17,7 @@ const InputSearch = (props: {days?: boolean}) => {
 
         store.deleteList()
 
-        store.setDateDay(await weatherApi.getWeather(cityName, 5))
+        store.setDateDay(await weatherApi.getWeather(cityName, 6))
     }
 
     return (
@@ -31,7 +31,8 @@ const InputSearch = (props: {days?: boolean}) => {
                     aria-label="Search" 
                     aria-describedby="search-addon" 
                 />
-                <button type="button" onClick={() => search()} className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
+                <button type="button" onClick={() => search()} className="btn btn-outline-primary" data-mdb-ripple-init>Поиск</button>
+                <button type="button" onClick={() => store.setFavorites(cityName)} className="btn btn-outline-primary" data-mdb-ripple-init>В избранное</button>
             </div>
         </div>
         

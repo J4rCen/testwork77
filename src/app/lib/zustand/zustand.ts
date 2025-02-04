@@ -15,10 +15,11 @@ interface IFavoritesList {
 
 interface Store {
     listWeather: IFavoritesList[]
-    favoritesList: IFavoritesList[]
+    favoritesList: string[]
     setDateDay: (date: IFavoritesList) => void
-    setFavorites: (date: IFavoritesList[]) => void
+    setFavorites: (date: string) => void
     deleteList: () => void
+    deleteFavorites: (date: string) => void
 }
 
 const useStore = create<Store>()(persist((set => ({
@@ -45,8 +46,18 @@ const useStore = create<Store>()(persist((set => ({
             listWeather: []
         }))
     },
-    setFavorites: async (list: any) => {
-        
+    setFavorites: (list: string) => {
+        set((store) => ({
+            favoritesList: [
+                ...store.favoritesList,
+                list
+            ]
+        }))
+    },
+    deleteFavorites: (list: any) => {
+        set(store => ({
+            favoritesList: store.favoritesList.filter(el => el != list)
+        }))
     },
 })), 
     {

@@ -8,7 +8,6 @@ const WeatherCard = (days: {days?: boolean}) => {
     const store = useStore()
 
     const layout = (el: any, index?: number) => {
-        console.log(el)
         return (
             <div className="container weatherCard" key={index}>
                 <div className="row justify-content-center">
