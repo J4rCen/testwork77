@@ -3,7 +3,6 @@ import useStore from "@/app/lib/zustand/zustand"
 import axios from "axios"
 
 class weatherApi {
-    private readonly api = '11eeda07de6aacfee7965797a135e957'
     private lat = 0
     private lon = 0
 
