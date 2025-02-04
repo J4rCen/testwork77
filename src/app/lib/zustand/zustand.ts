@@ -13,29 +13,40 @@ interface IFavoritesList {
     lat?: number
 }
 
-interface Store extends IFavoritesList {
+interface Store {
+    listWeather: IFavoritesList[]
     favoritesList: IFavoritesList[]
-    setDateDay: (date: IFavoritesList, cityName?: string, weather?: any) => void
-    setDateDays: (date: IFavoritesList[]) => void
+    setDateDay: (date: IFavoritesList) => void
+    setFavorites: (date: IFavoritesList[]) => void
+    deleteList: () => void
 }
 
 const useStore = create<Store>()(persist((set => ({
-    city: '',
-    temp: 0,
-    temp_max: 0,
-    temp_min: 0,
-    weather: '',
-    image: '',
+    listWeather: [],
     favoritesList: [],
     setDateDay: (list: any) => {
-        const city = list.city.name
-        const {temp, temp_max, temp_min} = list.list[0].main
-        const {main, icon} = list.list[0].weather[0]
-
-        set({city, temp, temp_max, temp_min, weather: main, image: icon})
+        const city = list.city?.name ?? ''
+        
+        list.list.map((el: any) => {
+            set((store) => ({
+                listWeather: [...store.listWeather, {
+                    city, 
+                    temp: el.main.temp, 
+                    temp_max: el.main.temp_max, 
+                    temp_min: el.main.temp_min, 
+                    weather: el.weather[0].main, 
+                    image: el.weather[0].icon
+                }]
+            }))  
+        })
     },
-    setDateDays: async (list) => {
-       
+    deleteList: () => {
+        set(({
+            listWeather: []
+        }))
+    },
+    setFavorites: async (list: any) => {
+        
     },
 })), 
     {

@@ -4,10 +4,12 @@ import WeatherCard from "./ui/weatherCard"
 const Home = () => {
   return (
     <>
-      <main className="container">
-        <div className="position-absolute top-50 start-50 translate-middle">
-          <div className="row gap-4">
-            <InputSearch/>
+      <main className="container center">
+        <div>
+          <div className="row justify-content-center">
+            <InputSearch />
+          </div>
+          <div className="row">
             <WeatherCard/>
           </div>
         </div>
