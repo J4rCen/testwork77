@@ -6,7 +6,7 @@ class weatherApi {
     private lon = 0
 
     private getPosition = async (city?: string) => {
-        await axios.get(`http://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.NEXT_PUBLIC_API_WEATHER_KEY}`)
+        await axios.get(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${process.env.NEXT_PUBLIC_API_WEATHER_KEY}`)
         .then((response) => {
             this.lat = response.data[0].lat
             this.lon = response.data[0].lon
