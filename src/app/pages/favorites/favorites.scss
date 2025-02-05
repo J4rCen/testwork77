@@ -1,0 +1,15 @@
+.favoritesPage {
+    padding: 10px;
+    margin: 10px;
+    width: 600px;
+}
+
+.favoritesPage_list_button {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 500px;
+    // width: 300px;
+    overflow: hidden;
+    overflow-y: scroll;
+}
