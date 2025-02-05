@@ -1,10 +1,10 @@
 "use client"
-import weatherApi from "@/app/api/weatherApi/router"
+import weatherApiInstance from "@/app/api/weatherApi/router"
 import useStore from "@/app/lib/zustand/zustand"
 import { useState } from "react"
 import './inputSearch.scss'
 
-const InputSearch = (props: {days?: boolean}) => {
+const InputSearch = () => {
 
     const store = useStore()
     const [cityName, setCityName] = useState<string>('')
@@ -17,7 +17,7 @@ const InputSearch = (props: {days?: boolean}) => {
 
         store.deleteList()
 
-        store.setDateDay(await weatherApi.getWeather(cityName, 6))
+        store.setDateDay(await weatherApiInstance.getWeather(cityName, 6))
     }
 
     return (

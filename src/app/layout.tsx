@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import './globals.scss'
 import  "bootstrap/dist/css/bootstrap.min.css"
 import HeaderMenu from "./ui/headerMenu";
+import InputSearch from "./ui/inputSearch";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,6 +18,9 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <HeaderMenu/>
+        <div className="row justify-content-center">
+          <InputSearch/>
+        </div>
         {children}
       </body>
     </html>

@@ -1,9 +1,9 @@
 import { create } from 'zustand'
-import weatherApi from '../../api/weatherApi/router'
 import { persist } from 'zustand/middleware'
 
-interface IFavoritesList {
+export interface IFavoritesList {
     city: string
+    date: string
     temp: number
     temp_max: number
     temp_min: number
@@ -22,16 +22,39 @@ interface Store {
     deleteFavorites: (date: string) => void
 }
 
-const useStore = create<Store>()(persist((set => ({
+const useStore = create<Store>()(persist(((set, get) => ({
     listWeather: [],
     favoritesList: [],
+    /* eslint-disable  @typescript-eslint/no-explicit-any */
     setDateDay: (list: any) => {
+        console.log(list)
         const city = list.city?.name ?? ''
         
+        const formatDate = (dateString: string): string => {
+            const months: string[] = [
+              "Января", "Февраля", "Марта", "Апреля", "Мая", "Июня",
+              "Июля", "Августа", "Сентября", "Октября", "Ноября", "Декабря"
+            ];
+            
+            const date = new Date(dateString);
+            if (isNaN(date.getTime())) return "Неверный формат даты";
+            
+            const day = date.getDate();
+            const month = months[date.getMonth()];
+            const year = date.getFullYear();
+            const hours = date.getHours();
+            
+            return `${day} ${month} ${year} ${hours}:00 Часов`;
+        };
+          
+
+        /* eslint-disable  @typescript-eslint/no-explicit-any */
         list.list.map((el: any) => {
+            console.log(el)
             set((store) => ({
                 listWeather: [...store.listWeather, {
-                    city, 
+                    city,
+                    date: formatDate(el.dt_txt),
                     temp: el.main.temp, 
                     temp_max: el.main.temp_max, 
                     temp_min: el.main.temp_min, 
@@ -47,14 +70,24 @@ const useStore = create<Store>()(persist((set => ({
         }))
     },
     setFavorites: (list: string) => {
+
+        const {favoritesList} = get()
+
+        if (favoritesList.includes(list)) {
+            alert("Город уже в избранном")
+            return
+        }
+
         set((store) => ({
             favoritesList: [
                 ...store.favoritesList,
                 list
             ]
         }))
+
+        alert('Город добавлен в избранное')
     },
-    deleteFavorites: (list: any) => {
+    deleteFavorites: (list: string) => {
         set(store => ({
             favoritesList: store.favoritesList.filter(el => el != list)
         }))

@@ -10,7 +10,13 @@ class weatherApi {
         .then((response) => {
             this.lat = response.data[0].lat
             this.lon = response.data[0].lon
-        }).catch(err => console.error(err))
+        }).catch(err => {
+            if(err) {
+                alert("При поиски произошла ошибка, проверти корректное название введенного города")
+            }
+
+            console.error(err)
+        })
     }
 
     public getWeather =  async (city?: string, days: number = 1) => {
@@ -23,4 +29,5 @@ class weatherApi {
     }
 }
 
-export default new weatherApi()
+const weatherApiInstance = new weatherApi();
+export default weatherApiInstance;
