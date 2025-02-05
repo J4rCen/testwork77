@@ -27,7 +27,6 @@ const useStore = create<Store>()(persist(((set, get) => ({
     favoritesList: [],
     /* eslint-disable  @typescript-eslint/no-explicit-any */
     setDateDay: (list: any) => {
-        console.log(list)
         const city = list.city?.name ?? ''
         
         const formatDate = (dateString: string): string => {
@@ -50,7 +49,6 @@ const useStore = create<Store>()(persist(((set, get) => ({
 
         /* eslint-disable  @typescript-eslint/no-explicit-any */
         list.list.map((el: any) => {
-            console.log(el)
             set((store) => ({
                 listWeather: [...store.listWeather, {
                     city,
